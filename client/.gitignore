@@ -1,5 +1,12 @@
-client/node_modules/
-client/dist/
+# Python & FastAPI
 server/__pycache__/
 server/.venv/
+*.pyc
+
+# Node & React
+client/node_modules/
+client/dist/
+
+# Secrets
 .env
+.env.local
