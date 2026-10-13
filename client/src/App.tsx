@@ -1,13 +1,23 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { Car, CarContextType } from '../types/car';
-import { mockCars } from '../data/mockCars';
+import React, { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
+
+type Car = { id: number; [key: string]: any };
+
+type CarContextType = {
+  cars: Car[];
+  favorites: Car[];
+  searchQuery: string;
+  setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
+  addCar: (newCar: Car) => void;
+  toggleFavorite: (car: Car) => void;
+  isFavorite: (carId: number) => boolean;
+};
 
 const CarContext = createContext<CarContextType | undefined>(undefined);
 
 const FAVORITES_KEY = 'carpoint_favorites';
 
 export const CarProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [cars, setCars] = useState<Car[]>(mockCars);
+  const [cars, setCars] = useState<Car[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>('');
 
   // Завантаження обраного з localStorage
